@@ -1,0 +1,43 @@
+schnorr.h .cpp
+hacker.h .cpp
+
+
+
+
+#pragma once
+
+#include <cstdint>
+
+namespace crypto {
+    class schnorr
+    {
+    public:
+        schnorr();
+        ~schnorr();
+
+        void generateKeys();
+
+        uint64_t p;
+        uint64_t q;
+        uint64_t g;
+        uint64_t y;
+
+    private:
+        uint64_t w;
+    };
+
+    class hacker
+    {
+    };
+} // namespace crypto
+
+------------------------------
+
+int main() {
+    crypto::schnorr sch;
+    sch.generateKeys();
+
+    while (true) {
+        
+    }
+}
