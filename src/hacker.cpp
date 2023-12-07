@@ -1,5 +1,5 @@
 #include <hacker.h>
-#include <math.h>
+#include <nmath.h>
 
 namespace crypto {
 
