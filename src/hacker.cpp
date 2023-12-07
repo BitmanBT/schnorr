@@ -1,0 +1,3 @@
+namespace crypto {
+
+} // namespace crypto
