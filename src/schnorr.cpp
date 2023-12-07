@@ -1,4 +1,5 @@
 #include <schnorr.h>
+#include <math.h>
 
 namespace crypto {
     void schnorr::generateKeys() {
