@@ -1,4 +1,4 @@
-#include "../include/schnorr.h"
+#include <schnorr.h>
 
 namespace crypto {
     void schnorr::generateKeys() {

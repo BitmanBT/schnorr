@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "include/schnorr.h"
+#include <schnorr.h>
+#include <hacker.h>
 
 using namespace crypto;
 
