@@ -3,7 +3,12 @@
 
 namespace crypto {
     void schnorr::generateKeys() {
-        //TODO
+        pub_k.p = math::getBigPrime();  // p
+        std::vector<uint64_t> factors = math::getPrimeFactors(pub_k.p-1);
+        pub_k.q = factors[factors.size()-1];  // q
+        pub_k.g = math::getGenerator(pub_k.p, pub_k.q);  // g
+        pr_k.w = math::getRandomUpLimit(pub_k.q);  // w
+        pub_k.y = math::powmod(pub_k.g, pub_k.q-pr_k.w, pub_k.p);  // y
     }
 
     bool schnorr::establish_connection(schnorr& Bob) {

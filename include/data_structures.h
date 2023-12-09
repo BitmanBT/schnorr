@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <ostream>
 
 namespace crypto {
     /**
@@ -12,6 +13,8 @@ namespace crypto {
         uint64_t q = 0;
         uint64_t g = 0;
         uint64_t y = 0;
+
+        friend std::ostream& operator<<(std::ostream& os, public_key& obj);
     };
 
     /**

@@ -28,7 +28,7 @@ namespace crypto {
          * Verifies authentification an object whose link we gained.
          * 
          * @remark Uses authentification_info structure.
-         * @param Bob - the one who is going to verify (or not) our connection
+         * @param Bob the one who is going to verify (or not) our connection
          * @return If we succeeded or not
         */
         bool establish_connection(schnorr& Bob);
@@ -38,7 +38,7 @@ namespace crypto {
          * 
          * @remark Uses messageSign structure.
          * 
-         * @param M - message to sign
+         * @param M message to sign
         */
         void sign(std::string& M);
 
@@ -47,7 +47,7 @@ namespace crypto {
          * 
          * @remark Uses messageSign structure.
          * 
-         * @param input - digital signature to verify
+         * @param input digital signature to verify
         */
         void verify(const messageSign& input);
 

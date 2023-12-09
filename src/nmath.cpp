@@ -6,8 +6,6 @@
 #include <cstring>
 #include <bitset>
 
-#include <iostream>
-
 namespace math {
     std::vector<uint64_t> first_primes;
 
@@ -28,6 +26,10 @@ namespace math {
         a[bits - 1] = 1;
     
         return a.to_ullong();
+    }
+
+    uint64_t getRandomUpLimit(uint64_t up_limit) {
+        return getRandom64() % up_limit;
     }
 
     void SieveOfEratosthenes(uint64_t n) {
@@ -151,5 +153,54 @@ namespace math {
             if (MillerRabinTest(candidate))
                 return candidate;
         }
+    }
+
+    std::vector<uint64_t> getPrimeFactors(uint64_t n) {
+        std::vector<uint64_t> out;
+        
+        // Print the number of 2s that divide n  
+        while (n % 2 == 0) {
+            out.push_back(2);
+            n = n/2;  
+        }  
+    
+        // n must be odd at this point. So we can skip  
+        // one element (Note i = i +2)  
+        for (uint64_t i = 3; i <= sqrt(n); i = i + 2) {  
+            // While i divides n, print i and divide n  
+            while (n % i == 0) {  
+                out.push_back(i);
+                n = n/i;  
+            }  
+        }  
+    
+        // This condition is to handle the case when n  
+        // is a prime number greater than 2  
+        if (n > 2) {  
+            out.push_back(n);
+        }
+
+        return out;
+    }
+
+    uint64_t gcd(uint64_t a, uint64_t b) {
+        if (a == 0) 
+            return b; 
+        return gcd(b % a, a);
+    }
+
+    uint64_t inversemod(uint64_t a, uint64_t m) {
+        uint64_t g = gcd(a, m); 
+        if (g != 1) {
+            return 0;
+        } else { 
+            // If a and m are relatively prime, then modulo 
+            // inverse is a^(m-2) mode m 
+            return powmod(a, m - 2, m);
+        }
+    }
+
+    uint64_t getGenerator(uint64_t p, uint64_t q) {
+        return powmod(getRandomUpLimit(p), static_cast<uint64_t>((p-1)/q), p);
     }
 } // namespace math
