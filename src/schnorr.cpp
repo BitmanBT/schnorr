@@ -11,7 +11,7 @@ namespace crypto {
         pub_k.y = math::powmod(pub_k.g, pub_k.q-pr_k.w, pub_k.p);  // y
     }
 
-    bool schnorr::establish_connection(schnorr& Bob) {
+    std::vector<uint64_t>& schnorr::give_authentification_info() const {
         //TODO
     }
 
@@ -19,11 +19,22 @@ namespace crypto {
         //TODO
     }
 
-    void schnorr::verify(const messageSign& input) {
+    void schnorr::verify(const messageSign& input) const {
+        //TODO
+    }
+
+    void Server::give_authentification_info(schnorr& Alice) const {
+        //TODO
+    }
+
+    void Server::get_authentification_info(schnorr& Alice) {
+        //TODO
+    }
+
+    std::string& Server::authentification(schnorr& Alice) {
         //TODO
     }
     
     public_key schnorr::pub_k;
-    authentification_info schnorr::auth;
     messageSign schnorr::mSign;
 } // namespace crypto

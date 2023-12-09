@@ -26,13 +26,20 @@ namespace crypto {
     };
 
     /**
-     * Structure to store information while establishing connection.
+     * Structure to store information on schnorr class side while authentification.
     */
-    struct authentification_info
+    struct authentification_info_schnorr
+    {
+        uint64_t e = 0;
+    };
+
+    /**
+     * Structure to store information on server class side while authentification.
+    */
+    struct authentification_info_server
     {
         uint64_t r = 0;
         uint64_t x = 0;
-        uint64_t e = 0;
         uint64_t s = 0;
     };
 

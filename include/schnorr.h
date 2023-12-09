@@ -3,6 +3,7 @@
 #include <data_structures.h>
 
 #include <string>
+#include <vector>
 
 namespace crypto {
     class schnorr
@@ -22,16 +23,11 @@ namespace crypto {
         void generateKeys();
 
         /**
-         * Makes a try for authentification.
+         * Gives authentification iniformation to server if needed.
          * 
-         * A try is being made by the object whose method is called.
-         * Verifies authentification an object whose link we gained.
-         * 
-         * @remark Uses authentification_info structure.
-         * @param Bob the one who is going to verify (or not) our connection
-         * @return If we succeeded or not
+         * @return Information needed for server to perform an authentification
         */
-        bool establish_connection(schnorr& Bob);
+        std::vector<uint64_t>& give_authentification_info() const;
 
         /**
          * Signes a message.
@@ -49,20 +45,48 @@ namespace crypto {
          * 
          * @param input digital signature to verify
         */
-        void verify(const messageSign& input);
+        void verify(const messageSign& input) const;
 
-        /**
-         * Structures to store all information needed
-         * Static because we don't need more than one
-        */
         static public_key pub_k;
-        static authentification_info auth;
+        authentification_info_schnorr auth;
         static messageSign mSign;
 
     private:
-        /**
-         * Structure to store private key.
-        */
         private_key pr_k;
+    };
+
+    class Server
+    {
+    public:
+        Server() = default;
+        ~Server() = default;
+
+        /**
+         * Performs authentification.
+         * 
+         * Object of schnorr class (who makes a try for authentification) is needed.
+         * 
+         * @remark Fills authentification_info fields in schnorr class.
+         * @param Alice the one who makes a try for authentification
+         * @return Name of the one who tried to connect
+        */
+        std::string& authentification(schnorr& Alice);
+
+        authentification_info_server auth;
+    
+    private:
+        /**
+         * Gives information to schnorr class object needed while performing an authentification.
+         * 
+         * @param Alice schnorr class object which tries to connect
+        */
+        void give_authentification_info(schnorr& Alice) const;
+
+        /**
+         * Asks for information stored in schnorr class object needed for authentification.
+         * 
+         * @param Alice schnorr class object which tries to connect
+        */
+        void get_authentification_info(schnorr& Alice);
     };
 } // namespace crypto
