@@ -48,8 +48,8 @@ namespace crypto {
     */
     struct messageSign
     {
-        uint64_t H;
-        uint64_t s1;
+        std::string M;
+        std::size_t s1;
         uint64_t s2;
     };
 } // namespace crypto
