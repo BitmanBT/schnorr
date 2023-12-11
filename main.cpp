@@ -1,11 +1,9 @@
 #include <iostream>
 
-#include <schnorr.h>
-#include <hacker.h>
+#include "schnorr.h"
+#include "hacker.h"
 
 int main() {
-    crypto::Server server;
-
     crypto::schnorr A("Alice");
     A.generateKeys(server);
     std::cout << A.pub_k << std::endl;
@@ -17,4 +15,9 @@ int main() {
     V.generateKeys(server);
     out = server.authentification(V);
     std::cout << out << std::endl;
+  
+    std::string M;
+    std::cin >> M;
+    A.sign(M);
+    std::cout << A.verify(A.mSign) << std::endl;
 }
