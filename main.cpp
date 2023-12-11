@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "schnorr.h"
-#include "hacker.h"
+#include <schnorr.h>
+#include <hacker.h>
 
 int main() {
     crypto::Server server;

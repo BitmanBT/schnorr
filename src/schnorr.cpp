@@ -1,5 +1,5 @@
-#include "schnorr.h"
-#include "nmath.h"
+#include <schnorr.h>
+#include <nmath.h>
 
 namespace crypto {
     schnorr::schnorr(std::string name) : name_(name) { }
