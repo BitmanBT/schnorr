@@ -4,6 +4,8 @@
 #include "hacker.h"
 
 int main() {
+    crypto::Server server;
+
     crypto::schnorr A("Alice");
     A.generateKeys(server);
     std::cout << A.pub_k << std::endl;
