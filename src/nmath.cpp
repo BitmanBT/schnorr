@@ -94,17 +94,23 @@ namespace math {
     }
 
     uint64_t mulmod(uint64_t a, uint64_t b, uint64_t mod) {
-        uint64_t res = 0;
-
-        while (a != 0) {
-            if (a & 1) {
-
-                res = (res + b) % mod;
-            }
-            a >>= 1;
-            b = (b << 1) % mod;
+        uint64_t res = 0; // Initialize result
+        a = a % mod;
+        while (b > 0)
+        {
+            // If b is odd, add 'a' to result
+            if (b % 2 == 1)
+                res = (res + a) % mod;
+    
+            // Multiply 'a' with 2
+            a = (a * 2) % mod;
+    
+            // Divide b by 2
+            b /= 2;
         }
-        return res;
+    
+        // Return result
+        return res % mod;
     }
 
     bool trialComposite(uint64_t a, uint64_t evenC, uint64_t to_test, int max_div_2) {
