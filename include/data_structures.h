@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <ostream>
+#include <vector>
 
 namespace crypto {
     /**
@@ -15,6 +16,7 @@ namespace crypto {
         uint64_t y = 0;
 
         friend std::ostream& operator<<(std::ostream& os, public_key& obj);
+        friend bool operator==(public_key& left, public_key& right);
     };
 
     /**
@@ -38,7 +40,7 @@ namespace crypto {
     */
     struct authentification_info_server
     {
-        uint64_t r = 0;
+        uint64_t e = 0;
         uint64_t x = 0;
         uint64_t s = 0;
     };
