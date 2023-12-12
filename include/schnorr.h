@@ -12,6 +12,7 @@ namespace crypto {
     class schnorr
     {
     public:
+        schnorr() = default;
         schnorr(std::string name);
         ~schnorr() = default;
 
@@ -55,7 +56,7 @@ namespace crypto {
         /**
          * My name :)
         */
-        std::string name_;
+        std::string name_ = "";
 
     private:
         private_key pr_k;

@@ -21,5 +21,7 @@ int main() {
     std::string M;
     std::cin >> M;
     A.sign(M);
-    std::cout << A.verify(A.mSign) << std::endl;
+    std::cout << V.verify(V.mSign) << std::endl;
+
+    crypto::hacker Hacker(A, server);
 }

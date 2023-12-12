@@ -12,4 +12,17 @@ namespace crypto {
         }
         return false;
     }
+
+    void public_key::operator=(const public_key& another) {
+        p = another.p;
+        q = another.q;
+        g = another.g;
+        y = another.y;
+    }
+
+    void authentification_info_server::operator=(const authentification_info_server& another) {
+        e = another.e;
+        x = another.x;
+        s = another.s;
+    }
 } // namespace crypto

@@ -17,6 +17,7 @@ namespace crypto {
 
         friend std::ostream& operator<<(std::ostream& os, public_key& obj);
         friend bool operator==(public_key& left, public_key& right);
+        void operator=(const public_key& another);
     };
 
     /**
@@ -43,12 +44,14 @@ namespace crypto {
         uint64_t e = 0;
         uint64_t x = 0;
         uint64_t s = 0;
+
+        void operator=(const authentification_info_server& another);
     };
 
     /**
      * Structure to store digital signature of the message.
     */
-    struct messageSign //Передать публичный ключ
+    struct messageSign
     {
         public_key pub_k;
         std::string M;
