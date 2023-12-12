@@ -27,6 +27,7 @@ namespace crypto {
 
     void schnorr::sign(std::string& M) {
         mSign.M = M;
+        mSign.pub_k = pub_k;
 
         uint64_t r = math::getRandomUpLimit(pub_k.q);
         uint64_t x = math::powmod(pub_k.g, r, pub_k.p);
@@ -36,7 +37,7 @@ namespace crypto {
     }
 
     bool schnorr::verify(const messageSign& input) const {
-        uint64_t X = math::mulmod(math::powmod(pub_k.g, input.s2, pub_k.p), math::powmod(pub_k.y, input.s1, pub_k.p), pub_k.p);
+        uint64_t X = math::mulmod(math::powmod(input.pub_k.g, input.s2, input.pub_k.p), math::powmod(input.pub_k.y, input.s1, input.pub_k.p), input.pub_k.p);
         uint64_t H = std::hash<std::string>{}(input.M) + std::hash<uint64_t>{}(X);
 
         return H == input.s1;

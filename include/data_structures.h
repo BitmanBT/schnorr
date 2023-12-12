@@ -48,8 +48,9 @@ namespace crypto {
     /**
      * Structure to store digital signature of the message.
     */
-    struct messageSign
+    struct messageSign //Передать публичный ключ
     {
+        public_key pub_k;
         std::string M;
         std::size_t s1;
         uint64_t s2;
