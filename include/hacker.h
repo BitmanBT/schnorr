@@ -11,7 +11,13 @@ namespace crypto {
 
         void hack();
 
+        double getPercentages();
+
+        int getPrivateKey();
+
     private:
         authentification_info_server forHacker;
+        double percentages = 0;
+        private_key pr_k;
     };
 } // namespace crypto

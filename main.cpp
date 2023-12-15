@@ -24,4 +24,9 @@ int main() {
     std::cout << V.verify(V.mSign) << std::endl;
 
     crypto::hacker Hacker(A, server);
+    Hacker.hack();
+    if (Hacker.getPercentages() != 0)
+        std::cout << "percetanges: " << Hacker.getPercentages() << std::endl;
+    else
+        std::cout << "w: " << Hacker.getPrivateKey() << std::endl;
 }
