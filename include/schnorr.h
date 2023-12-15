@@ -14,7 +14,7 @@ namespace crypto {
     public:
         schnorr() = default;
         schnorr(std::string name);
-        virtual ~schnorr() = default;
+        ~schnorr() = default;
 
         /**
          * Generates public and private keys.
