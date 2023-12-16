@@ -16,7 +16,7 @@ namespace crypto {
         return percentages;
     }
 
-    int hacker::getPrivateKey() {
+    uint64_t hacker::getPrivateKey() {
         return pr_k.w;
     }
 

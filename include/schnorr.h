@@ -58,7 +58,7 @@ namespace crypto {
         */
         std::string name_ = "";
 
-    private:
+    protected:
         private_key pr_k;
     };
 

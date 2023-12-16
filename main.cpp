@@ -4,7 +4,7 @@
 #include <hacker.h>
 
 int main() {
-    crypto::Server server;
+    /*crypto::Server server;
 
     crypto::schnorr A("Alice");
     A.generateKeys(server);
@@ -28,5 +28,5 @@ int main() {
     if (Hacker.getPercentages() != 0)
         std::cout << "percetanges: " << Hacker.getPercentages() << std::endl;
     else
-        std::cout << "w: " << Hacker.getPrivateKey() << std::endl;
+        std::cout << "w: " << Hacker.getPrivateKey() << std::endl;*/
 }
