@@ -49,6 +49,7 @@ namespace console {
               << colors::setcolor(colors::COLOR::RED) << "[auth]" << colors::setcolor(colors::COLOR::YELLOW) << " - try to authenticate on the server (you will be asked who will make a try)" << std::endl
               << colors::setcolor(colors::COLOR::RED) << "[sign]" << colors::setcolor(colors::COLOR::YELLOW) << " - sign a message (you will be asked to enter a message and to enter who will sign a message)" << std::endl
               << colors::setcolor(colors::COLOR::RED) << "[verify]" << colors::setcolor(colors::COLOR::YELLOW) << " - verify existing message (you will be asked who will verify it)" << std::endl
+              << colors::setcolor(colors::COLOR::RED) << "[replace]" << colors::setcolor(colors::COLOR::YELLOW) << " - replace existing signature's message (completely mess it up)" << std::endl
               << colors::setcolor(colors::COLOR::RED) << "[hack]" << colors::setcolor(colors::COLOR::YELLOW) << " - try to find out client's private key (you will be asked for the name of this client)" << std::endl
               << colors::setcolor(colors::COLOR::RED) << "[quit]" << colors::setcolor(colors::COLOR::YELLOW) << " - quit simulator" << std::endl
               << colors::setcolor(colors::COLOR::WHITE, colors::BG_COLOR::BLACK);

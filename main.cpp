@@ -11,7 +11,7 @@
 using namespace colors;
 
 // Legal commands to simulator
-enum COMMANDS : int {CLIENT = 1, KEYS, AUTH, SIGN, VERIFY, HACK, QUIT};
+enum COMMANDS : int {CLIENT = 1, KEYS, AUTH, SIGN, VERIFY, REPLACE, HACK, QUIT};
 
 int main() {
     // Greeting to user
@@ -23,8 +23,8 @@ int main() {
     
     // A map of the correspondence of commands and their string representation
     std::map<std::string, int> map = { {"client", COMMANDS::CLIENT}, {"keys", COMMANDS::KEYS}, {"auth", COMMANDS::AUTH},
-                                       {"sign", COMMANDS::SIGN}, {"verify", COMMANDS::VERIFY}, {"hack", COMMANDS::HACK},
-                                       {"quit", COMMANDS::QUIT} };
+                                       {"sign", COMMANDS::SIGN}, {"verify", COMMANDS::VERIFY}, {"replace", COMMANDS::REPLACE},
+                                       {"hack", COMMANDS::HACK}, {"quit", COMMANDS::QUIT} };
     
     // Working part
     bool quit = false;
@@ -39,7 +39,7 @@ int main() {
             {
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter new client's name: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 clis.createClient(name);
                 break;
             }
@@ -52,7 +52,7 @@ int main() {
                 }
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to generate keys: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 crypto::schnorr* chosenOne = clis.findByName(name);
                 if (chosenOne == nullptr) {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
@@ -71,7 +71,7 @@ int main() {
                 }
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to perform authentication on the server: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 crypto::schnorr* chosenOne = clis.findByName(name);
                 if (chosenOne == nullptr) {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
@@ -95,7 +95,7 @@ int main() {
                 }
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to sign a message: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 crypto::schnorr* chosenOne = clis.findByName(name);
                 if (chosenOne == nullptr) {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
@@ -130,13 +130,26 @@ int main() {
                 }
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to verify existing message: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 crypto::schnorr* chosenOne = clis.findByName(name);
                 if (chosenOne == nullptr) {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
                     break;
                 }
                 std::cout << std::boolalpha << "Result of verification: " << chosenOne->verify(clis.clientPtrs[0]->mSign) << std::endl;
+                break;
+            }
+
+        case COMMANDS::REPLACE:
+            {
+                if (clis.clientPtrs[0]->mSign.M.empty()) {
+                    std::cout << setcolor(COLOR::RED) << "[ERROR] No signature exists!" << setcolor(COLOR::WHITE) << std::endl;
+                    break;
+                }
+                std::cout << setcolor(COLOR::MAGENTA) << "Now message is as follows: " << setcolor(COLOR::WHITE) << clis.clientPtrs[0]->mSign.M << std::endl;
+                std::cout << setcolor(COLOR::MAGENTA) << "Enter new message to mess digital signature up: " << setcolor(COLOR::WHITE);
+                std::getline(std::cin >> std::ws, clis.clientPtrs[0]->mSign.M);
+                std::cout << "Done" << std::endl;
                 break;
             }
         
@@ -148,7 +161,7 @@ int main() {
                 }
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to hack: " << setcolor(COLOR::WHITE);
                 std::string name;
-                std::cin >> name;
+                std::getline(std::cin >> std::ws, name);
                 crypto::schnorr* chosenOne = clis.findByName(name);
                 if (chosenOne == nullptr) {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
