@@ -7,7 +7,23 @@ namespace crypto {
     class hacker : public schnorr
     {
     public:
+        hacker() = default;
+        hacker(const Server& Server);
         hacker(const schnorr& Alice, const Server& Server);
+
+        /**
+         * Steals public key from schnorr object.
+         * 
+         * @param Alice who to steal public key from
+        */
+        void stealPublicKey(const schnorr& Alice);
+
+        /**
+         * Steal authentification info from server.
+         * 
+         * @param Server
+        */
+        void stealInfoFromServer(const Server& Server);
 
         /**
          * Trying to calculate schnorr's object's (given in constructor) private key.

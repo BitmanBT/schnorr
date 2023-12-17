@@ -5,10 +5,22 @@
 using namespace std::chrono;
 
 namespace crypto {
-    const double stop = 30;
+    const double stop = 10;
+
+    hacker::hacker(const Server& Server) {
+        forHacker = Server.auth;
+    }
 
     hacker::hacker(const schnorr& Alice, const Server& Server) {
         pub_k = Alice.pub_k;
+        forHacker = Server.auth;
+    }
+
+    void hacker::stealPublicKey(const schnorr& Alice) {
+        pub_k = Alice.pub_k;
+    }
+    
+    void hacker::stealInfoFromServer(const Server& Server) {
         forHacker = Server.auth;
     }
 

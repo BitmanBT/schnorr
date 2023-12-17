@@ -20,6 +20,7 @@ int main() {
     // Preparatory activities
     crypto::Server server;
     crypto::ClientFactory clis;
+    crypto::hacker hacker;
     
     // A map of the correspondence of commands and their string representation
     std::map<std::string, int> map = { {"client", COMMANDS::CLIENT}, {"keys", COMMANDS::KEYS}, {"auth", COMMANDS::AUTH},
@@ -176,7 +177,8 @@ int main() {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] This client hasn't performed authentification yet!" << setcolor(COLOR::WHITE) << std::endl;
                     break;
                 }
-                crypto::hacker hacker(*chosenOne, server);
+                hacker.stealPublicKey(*chosenOne);
+                hacker.stealInfoFromServer(server);
                 hacker.hack();
                 uint64_t out = hacker.getPrivateKey();
                 if (out) {
