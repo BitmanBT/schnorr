@@ -167,7 +167,7 @@ int main() {
                 hacker.hack();
                 uint64_t out = hacker.getPrivateKey();
                 if (out) {
-                    std::cout << "Success! Priate key of " << name << " is " << out << std::endl;
+                    std::cout << "Success! Private key of " << name << " is " << out << std::endl;
                 } else {
                     std::cout << "Hacker ran out of time. He went through " << hacker.getPercentages() << '%' << " of the passwords" << std::endl;
                 }
