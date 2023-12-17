@@ -5,7 +5,7 @@
 using namespace std::chrono;
 
 namespace crypto {
-    const double stop = 10;
+    const double stop = 30;
 
     hacker::hacker(const Server& Server) {
         forHacker = Server.auth;

@@ -20,7 +20,7 @@ int main() {
     // Preparatory activities
     crypto::Server server;
     crypto::ClientFactory clis;
-    crypto::hacker hacker;
+    //crypto::hacker hacker;
     
     // A map of the correspondence of commands and their string representation
     std::map<std::string, int> map = { {"client", COMMANDS::CLIENT}, {"keys", COMMANDS::KEYS}, {"auth", COMMANDS::AUTH},
@@ -73,17 +73,27 @@ int main() {
                 std::cout << setcolor(COLOR::MAGENTA) << "Enter the name of the client you want to perform authentication on the server: " << setcolor(COLOR::WHITE);
                 std::string name;
                 std::getline(std::cin >> std::ws, name);
-                crypto::schnorr* chosenOne = clis.findByName(name);
-                if (chosenOne == nullptr) {
-                    std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
-                    break;
+                std::string out;
+                if (name == "hacker") {
+                    crypto::public_key emptykey;
+                    if (clis.Hacker.pub_k == emptykey) {
+                        std::cout << setcolor(COLOR::RED) << "[ERROR] Hacker is not ready (no stolen public key)!" << setcolor(COLOR::WHITE) << std::endl;
+                        break;
+                    }
+                    out = server.authentification(clis.Hacker);
+                } else {
+                    crypto::schnorr* chosenOne = clis.findByName(name);
+                    if (chosenOne == nullptr) {
+                        std::cout << setcolor(COLOR::RED) << "[ERROR] No client with such name!" << setcolor(COLOR::WHITE) << std::endl;
+                        break;
+                    }
+                    crypto::public_key emptykey;
+                    if (chosenOne->pub_k == emptykey) {
+                        std::cout << setcolor(COLOR::RED) << "[ERROR] This client hasn't generated keys!" << setcolor(COLOR::WHITE) << std::endl;
+                        break;
+                    }
+                    out = server.authentification(*chosenOne);
                 }
-                crypto::public_key emptykey;
-                if (chosenOne->pub_k == emptykey) {
-                    std::cout << setcolor(COLOR::RED) << "[ERROR] This client hasn't generated keys!" << setcolor(COLOR::WHITE) << std::endl;
-                    break;
-                }
-                std::string out = server.authentification(*chosenOne);
                 std::cout << "The server recognized " << out << std::endl;
                 break;
             }
@@ -177,14 +187,14 @@ int main() {
                     std::cout << setcolor(COLOR::RED) << "[ERROR] This client hasn't performed authentification yet!" << setcolor(COLOR::WHITE) << std::endl;
                     break;
                 }
-                hacker.stealPublicKey(*chosenOne);
-                hacker.stealInfoFromServer(server);
-                hacker.hack();
-                uint64_t out = hacker.getPrivateKey();
+                clis.Hacker.stealPublicKey(*chosenOne);
+                clis.Hacker.stealInfoFromServer(server);
+                clis.Hacker.hack();
+                uint64_t out = clis.Hacker.getPrivateKey();
                 if (out) {
                     std::cout << "Success! Private key of " << name << " is " << out << std::endl;
                 } else {
-                    std::cout << "Hacker ran out of time. He went through " << hacker.getPercentages() << '%' << " of the passwords" << std::endl;
+                    std::cout << "Hacker ran out of time. He went through " << clis.Hacker.getPercentages() << '%' << " of the passwords" << std::endl;
                 }
                 break;
             }

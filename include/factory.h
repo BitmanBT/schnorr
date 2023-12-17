@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <schnorr.h>
+#include <hacker.h>
 
 namespace crypto {
     class ClientFactory
@@ -16,5 +17,6 @@ namespace crypto {
         schnorr* findByName(std::string& name);
 
         std::vector<schnorr*> clientPtrs;
+        hacker Hacker;
     };
 } // namespace crypto
