@@ -25,7 +25,7 @@ namespace crypto {
     */
     struct private_key
     {
-        uint64_t w;
+        uint64_t w = 0;
     };
 
     /**
