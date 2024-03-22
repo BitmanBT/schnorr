@@ -1,2 +1,2 @@
 # schnorr
-Project on "Information Protection"
+Интерактивный многофункциональный симулятор криптосистемы Шнорра
